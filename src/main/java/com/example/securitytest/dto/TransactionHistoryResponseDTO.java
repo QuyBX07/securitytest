@@ -17,25 +17,22 @@ import java.util.UUID;
 @Builder
 public class TransactionHistoryResponseDTO {
 
-    private UUID transactionId; // UUID
-    private String account;       // Số tài khoản (giải mã AES)
+    // UUID của giao dịch (dùng để định danh giao dịch, KHÔNG nên lộ khi log)
+    private UUID transactionId;
+
+    // Số tài khoản sau khi đã được giải mã AES
+// Đây là dữ liệu nhạy cảm → cần mask khi log
+    private String account;
+
+    // Số tiền ghi nợ (tài khoản nguồn)
     private BigDecimal inDebt;
+
+    // Số tiền ghi có (tài khoản đích)
     private BigDecimal have;
+
+    // Thời điểm phát sinh giao dịch
     private LocalDateTime time;
 
-    /**
-     * Mask các dữ liệu nhạy cảm khi log
-     */
-    public void maskSensitiveData() {
-        this.transactionId = null;
-        this.account = mask(this.account);
-        this.inDebt = null;
-        this.have = null;
-        this.time = null;
-    }
 
-    private String mask(String value) {
-        if (value == null) return null;
-        return "?".repeat(value.length());
-    }
+
 }

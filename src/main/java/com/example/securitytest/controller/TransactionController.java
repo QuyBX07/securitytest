@@ -3,7 +3,9 @@ package com.example.securitytest.controller;
 import com.example.securitytest.dto.TransactionHistoryRequestDTO;
 import com.example.securitytest.dto.TransactionHistoryResponseDTO;
 import com.example.securitytest.service.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/transactions")
 @RequiredArgsConstructor
+/* Controller xử lý các API liên quan đến giao dịch
+ */
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -21,22 +25,22 @@ public class TransactionController {
      */
     @PostMapping
     public ResponseEntity<List<TransactionHistoryResponseDTO>> createTransaction(
-            @RequestBody TransactionHistoryRequestDTO requestDTO
+            @RequestBody @Valid TransactionHistoryRequestDTO requestDTO
     ) {
-        List<TransactionHistoryResponseDTO> responses =
-                transactionService.createTransaction(requestDTO);
-        return ResponseEntity.ok(responses);
+        List<TransactionHistoryResponseDTO> responses = transactionService.createTransaction(requestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED) // 201 Created
+                .body(responses);
     }
+
 
     /**
      * Lấy tất cả giao dịch
      */
     @GetMapping
     public ResponseEntity<List<TransactionHistoryResponseDTO>> getAllTransactions(
-            @RequestParam(defaultValue = "true") boolean maskSensitive
     ) {
         List<TransactionHistoryResponseDTO> responses =
-                transactionService.getAllTransactions(maskSensitive);
+                transactionService.getAllTransactions();
         return ResponseEntity.ok(responses);
     }
 }

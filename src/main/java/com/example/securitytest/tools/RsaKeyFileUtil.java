@@ -1,4 +1,6 @@
-package com.example.securitytest.utils;
+package com.example.securitytest.tools;
+
+import com.example.securitytest.constant.KeyPathConstant;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -53,7 +55,7 @@ public class RsaKeyFileUtil {
 
     public static void main(String[] args) throws Exception {
         // Sinh key và lưu tạm trong project
-        generateKeyFiles("public.key", "private.key");
+        generateKeyFiles(KeyPathConstant.RSA_PUBLIC_KEY_PATH, KeyPathConstant.RSA_PRIVATE_KEY_PATH);
         System.out.println("Keys generated!");
     }
 }

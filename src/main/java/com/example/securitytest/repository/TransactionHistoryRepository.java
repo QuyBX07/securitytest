@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+/**
+ * Repository cho entity TransactionHistory.
+ *
+ * Cung cấp các phương thức truy xuất dữ liệu liên quan đến lịch sử giao dịch.
+ */
 public interface TransactionHistoryRepository extends JpaRepository<TransactionHistory, UUID> {
 
     /**
