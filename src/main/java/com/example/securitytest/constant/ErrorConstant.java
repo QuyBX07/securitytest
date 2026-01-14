@@ -26,4 +26,6 @@ public final class ErrorConstant {
 
     public static final String RSA_DECRYPTION_FAILED =
             "RSA decryption failed";
+    public static final String RSA_ENCRYPTION_FAILED =
+            "RSA encryption failed";
 }

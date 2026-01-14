@@ -54,7 +54,7 @@ public class EncryptServiceImpl implements EncryptService {
             return AesUtil.encrypt(plainText, aesKey);
         } catch (Exception e) {
             log.error(LOG_AES_ENCRYPTION_ERROR, e);
-            throw new RuntimeException(AES_ENCRYPTION_FAILED, e);
+            throw new RuntimeException(AES_ENCRYPTION_FAILED);
         }
     }
 
@@ -71,7 +71,7 @@ public class EncryptServiceImpl implements EncryptService {
             return AesUtil.decrypt(cipherText, aesKey);
         } catch (Exception e) {
             log.error(LOG_AES_DECRYPTION_ERROR, e);
-            throw new RuntimeException(AES_DECRYPTION_FAILED, e);
+            throw new RuntimeException(AES_DECRYPTION_FAILED);
         }
     }
 
@@ -93,8 +93,33 @@ public class EncryptServiceImpl implements EncryptService {
             return RsaUtil.decrypt(cipherText, privateKey);
         } catch (Exception e) {
             log.error(LOG_RSA_DECRYPTION_ERROR, e);
-            throw new IllegalArgumentException(RSA_DECRYPTION_FAILED, e);
+            throw new IllegalArgumentException(RSA_DECRYPTION_FAILED);
         }
     }
 
+    /**
+     * Mã hóa dữ liệu bằng RSA (public key).
+     *
+     * Thường dùng để:
+     * - Mã hóa dữ liệu trả về client
+     * - Đảm bảo dữ liệu response không bị đọc lén
+     *
+     * @param plainText dữ liệu gốc
+     * @return dữ liệu đã được mã hóa RSA
+     * @throws RuntimeException nếu mã hóa thất bại
+     */
+    @Override
+    public String encryptRSA(String plainText) {
+        try {
+            return RsaUtil.encrypt(
+                    plainText,
+                    RsaUtil.loadPublicKey(
+                            KeyPathConstant.RSA_PUBLIC_KEY_PATH
+                    )
+            );
+        } catch (Exception e) {
+            log.error(LOG_RSA_ENCRYPTION_ERROR, e);
+            throw new RuntimeException(RSA_ENCRYPTION_FAILED);
+        }
+    }
 }

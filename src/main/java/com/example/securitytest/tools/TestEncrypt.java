@@ -20,8 +20,8 @@ public class TestEncrypt {
         String encryptedTarget = RsaUtil.encrypt(targetAccount, publicKey);
         String encryptedAmount = RsaUtil.encrypt(amount, publicKey);
 
-        System.out.println("sourceAccount:" + encryptedSource);
-        System.out.println("targetAccount" + encryptedTarget);
-        System.out.println("amount" + encryptedAmount);
+        System.out.println("sourceAccount: " + encryptedSource);
+        System.out.println("targetAccount: " + encryptedTarget);
+        System.out.println("amount: " + encryptedAmount);
     }
 }

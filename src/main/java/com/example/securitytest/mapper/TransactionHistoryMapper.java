@@ -28,17 +28,26 @@ public class TransactionHistoryMapper {
         if (entity == null) return null;
 
         // Giải mã số tài khoản (được mã hóa AES trong database)
-        String account = encryptService.decryptAES(entity.getAccount());
+        String accountPlain = encryptService.decryptAES(entity.getAccount());
 
         // Build DTO từ dữ liệu entity
         return TransactionHistoryResponseDTO.builder()
-                .transactionId(entity.getTransactionId())
-                .account(account)
-                .inDebt(entity.getInDebt())
-                .have(entity.getHave())
-                .time(entity.getTime())
+                .transactionId(
+                        encryptService.encryptRSA(entity.getTransactionId().toString())
+                )
+                .account(
+                        encryptService.encryptRSA(accountPlain)
+                )
+                .inDebt(
+                        encryptService.encryptRSA(entity.getInDebt().toPlainString())
+                )
+                .have(
+                        encryptService.encryptRSA(entity.getHave().toPlainString())
+                )
+                .time(
+                        encryptService.encryptRSA(entity.getTime().toString())
+                )
                 .build();
-
     }
 }
 

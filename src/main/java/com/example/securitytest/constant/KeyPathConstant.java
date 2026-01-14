@@ -12,9 +12,9 @@ public final class KeyPathConstant {
     /** Đường dẫn private key RSA */
     public static final String RSA_PRIVATE_KEY_PATH = "keys/private.key";
 
-    /** (Nếu có) Public key RSA */
+    /** Đường Public key RSA */
     public static final String RSA_PUBLIC_KEY_PATH = "keys/public.key";
 
-    /** (Nếu sau này dùng keystore) */
+    /** tên biến môi trường AES key */
     public static final String AES_KEY_NAME = "AES_KEY";
 }

@@ -4,6 +4,7 @@ package com.example.securitytest.service.impl;
 import com.example.securitytest.dto.TransactionHistoryRequestDTO;
 import com.example.securitytest.dto.TransactionHistoryResponseDTO;
 import com.example.securitytest.entity.TransactionHistory;
+import com.example.securitytest.logging.TransactionLogMessage;
 import com.example.securitytest.mapper.TransactionHistoryMapper;
 import com.example.securitytest.repository.TransactionHistoryRepository;
 import com.example.securitytest.service.EncryptService;
@@ -95,15 +96,15 @@ public class TransactionServiceImpl implements TransactionService {
             );
 
         } catch (NumberFormatException e) {
-            log.warn(LOG_INVALID_AMOUNT, requestDTO);
+            log.warn(LOG_INVALID_AMOUNT, TransactionLogMessage.MASKED_TRANSACTION);
             throw new NumberFormatException(INVALID_AMOUNT);
 
         } catch (IllegalArgumentException e) {
-            log.warn(LOG_INVALID_TRANSACTION_DATA, requestDTO);
+            log.warn(LOG_INVALID_TRANSACTION_DATA, TransactionLogMessage.MASKED_TRANSACTION);
             throw new IllegalArgumentException(INVALID_TRANSACTION_DATA);
 
         } catch (Exception e) {
-            log.error(LOG_CREATE_TRANSACTION_ERROR, requestDTO, e);
+            log.error(LOG_CREATE_TRANSACTION_ERROR, TransactionLogMessage.MASKED_TRANSACTION);
             throw new RuntimeException(CREATE_TRANSACTION_FAILED);
         }
     }

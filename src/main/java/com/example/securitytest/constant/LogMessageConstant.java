@@ -26,4 +26,7 @@ public final class LogMessageConstant {
 
     public static final String LOG_RSA_DECRYPTION_ERROR =
             "RSA decryption error";
+
+    public static final String LOG_RSA_ENCRYPTION_ERROR =
+            "RSA encryption error";
 }

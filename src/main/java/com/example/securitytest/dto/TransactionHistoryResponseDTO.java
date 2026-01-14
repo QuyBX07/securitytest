@@ -17,22 +17,13 @@ import java.util.UUID;
 @Builder
 public class TransactionHistoryResponseDTO {
 
-    // UUID của giao dịch (dùng để định danh giao dịch, KHÔNG nên lộ khi log)
-    private UUID transactionId;
+    private String transactionId; // RSA string
 
-    // Số tài khoản sau khi đã được giải mã AES
-// Đây là dữ liệu nhạy cảm → cần mask khi log
-    private String account;
+    private String account;        // RSA string
 
-    // Số tiền ghi nợ (tài khoản nguồn)
-    private BigDecimal inDebt;
+    private String inDebt;         // RSA string
 
-    // Số tiền ghi có (tài khoản đích)
-    private BigDecimal have;
+    private String have;           // RSA string
 
-    // Thời điểm phát sinh giao dịch
-    private LocalDateTime time;
-
-
-
+    private String time;           // RSA string
 }
